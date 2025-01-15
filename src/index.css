@@ -12,6 +12,10 @@ input,select,button{
     outline: none;
 }
 
+button:hover{
+    opacity: 0.5;
+}
+
 .card{
     @apply w-1/2  h-1/4 border-white 
 }

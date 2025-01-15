@@ -176,7 +176,7 @@ function App() {
               <p>{errorMessage}</p>
               <div className="absolute bottom-2 flex justify-between w-full">
                 <div><button onClick={removeOpt} className="bg-black text-indigo-100 px-2 rounded-md">CANCEL</button></div>
-                <div className="mr-5 text-white bg-indigo-800 px-2 rounded-md"><button onClick={pushtoTodo}>APPLY</button></div>
+                <div className="mr-5 text-white bg-indigo-800 px-2 rounded-md"><button className="border-none" onClick={pushtoTodo}>APPLY</button></div>
               </div>
             </div>
           </div>
