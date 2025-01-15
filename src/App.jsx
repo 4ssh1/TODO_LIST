@@ -6,15 +6,20 @@ import SelectOpt from "./selectOpt"
 function App() {
   const [darkmode, setDarkMode] = useState(false)
   const [Todos, setTodos] = useState([])
-  const [showTodo, setShowTodo] = useState([])
+  const [searchArray, setSearchArray] = useState([])
   const [showOption, setShowOption] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const [errorMessage, setErrorMessage] = useState('')
   const [showEdit, setShowEdit] = useState(false)
   const [editedValue, setEditedValue] = useState("")
-  const [search, setSearch] = useState([])
+  const [search, setSearch] = useState(false)
+  const [searchValue, setSearchValue] = useState("")
   const [selectedMode, setSelectedMode] = useState("all")
-  const [searchPlaceholder, setSearchPlaceholder] = useState("Search note ...")
+  const [updateTodo, setUpdateTodo] = useState(-1)
+  const [SearchPlaceHolder, setSearchPlaceHolder]= useState("Search note...")
+  const searched = Todos.filter(elements => {
+    return elements.note.toLowerCase().includes(searchValue.toLowerCase())
+  })
 
   useEffect(() => {
     const storedTodo = JSON.parse(localStorage.getItem("Todo"))
@@ -27,8 +32,7 @@ function App() {
     return localStorage.setItem("Todo", JSON.stringify(Todos))
   }, [Todos])
 
-
-  function addButton() {
+   function addButton() {
     setShowOption(true)
     setInputValue("")
   }
@@ -44,26 +48,11 @@ function App() {
     setErrorMessage("")
   }
 
-
-  // function checkTodo( done, index) {
-  //   setTodos((prev)=>{
-  //     return prev.map((todo,i)=>{
-  //       let xyz = {...todo}
-  //       if(i==index){
-  //         xyz = {...xyz, done}
-  //       }
-  //      (i === index) ? {...todo, done} : todo 
-  //       return xyz
-  //     })
-  //   })
-  // }
-
   function checkTodo(done, index) {
     const updatedTodos = Todos.map((todo, i) =>
       i === index ? { ...todo, done } : todo
     );
     setTodos(updatedTodos);
-    setShowTodo(updatedTodos);
   }
 
   function pushtoTodo() {
@@ -82,43 +71,11 @@ function App() {
     }
   }
 
-
-  // function pushtoTodo() {
-  //   if(inputValue.trim().length==0){
-  //     setErrorMessage("Invalid input")
-  //   }else{
-  //     const newTodo = {note:inputValue, done: false}
-  //     setTodos((prev)=>[...prev, newTodo])
-  //     setShowOption(false)
-  //     setShowTodo(newTodo)
-  //   }
-  // }
-
   function deleteTodo(index) {
     const newTodo = Todos.filter((_, i) => {
       return i != index
     })
     setTodos(newTodo)
-    setShowTodo(newTodo)
-  }
-
-  function searchTodo() {
-    const newTodo = [...Todos]
-    const filtered = newTodo.filter(element => {
-      return element.note.toLowerCase().includes(search.toLowerCase())
-    })
-    if (filtered) {
-      setTodos( filtered)
-    }
-    else {
-      setTodos(newTodo)
-    }
-    if ( filtered &&search.length === 0) {
-      setSearchPlaceholder("No input to search...")
-    } else {
-      setSearchPlaceholder('Search note ...')
-    }
-    setSearch([])
   }
 
   const newTodo = Todos.filter((todo)=>{
@@ -135,33 +92,78 @@ function App() {
     }
   })
 
+  function show(){
+    if(searchValue.length ==0){
+      setSearchPlaceHolder("No input")
+    }else{
+      setSearch(true)
+      setSearchArray(searched)
+      setSearchPlaceHolder("Search note ...")
+    }
+  }
+
+  function cancelSearch(){
+    setSearch(false)
+    setSearchValue('')
+    setSearchPlaceHolder("Search note ...")
+  }
+
+  function renameTodo(i){
+    const newTodo = [...Todos].map((_, ind)=>{
+      if (ind == i){
+        setShowEdit(true)
+        setUpdateTodo(i) // made the magic happen
+      }
+    })
+    return newTodo
+  }
+
+  function handleEdit(e){
+    setEditedValue(e.target.value)
+  }
+
+  function endOfRename(index){
+      const updatedTodos = Todos.map((todo, i) =>
+        i === index ? { ...todo, note:editedValue } : todo
+      );
+      setTodos(updatedTodos)
+      setShowEdit(false)
+      setEditedValue("")
+    }
 
   return (
     <>
-      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100% relative 
+      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100% relative pt-5
       ${showOption && "opacity-70"}`} >
-        <h2 className="text-center pb-6 pt-1 font-bold text-xl tracking-wide">TODO LIST</h2>
-        <div className="px-14">
-          <div className="flex pb-3"><input className="rounded-md mr-4 pl-5 pr-9 w-64" type="text" name="search"
-            placeholder={searchPlaceholder} value={search} onChange={(e) => setSearch(e.target.value)} />
-            <img src="Vector.png" onClick={searchTodo} className="w-3 h-5 block absolute top-16 left-64 md:left-72 hover:opacity-50 " />
-            <SelectOpt selectedMode={selectedMode} setSelectedMode={setSelectedMode} Todos={showTodo} setTodos={setShowTodo} />
+        <h1 className="text-center pb-4 pt-1 font-bold text-3xl tracking-wide">TODO LIST</h1>
+        <div className="ml-2 mr-4 md:px-10">
+          <div className="flex pb-8"><input className="rounded-md mr-4 pl-5 pr-9 w-64" type="text" name="search"
+            placeholder={SearchPlaceHolder} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+            <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top left-52 md:left-64 hover:opacity-50 bg-indigo-100 " />
+{ searchValue !== ""  &&  <button className="absolute top2 left-44 md:left-56 border-none pt-1" onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
+}            <SelectOpt selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
             <button className="border-none"><img onClick={() => setDarkMode(!darkmode)}
              src={darkmode ? "lightMode.png" : "darkMode.png"} /></button>
           </div>
+         {search ? (searchArray.map((todoSearched, i)=>{
+              <li key = {i}>{todoSearched.note}</li>
+              }))
+           :
           <ul>
             {(Todos?.length > 0) ? newTodo.map((todo, i) =>
-              <li className="flex mb-2" key={i}>
+              <li className="flex mb-4 " key={i}>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
-                {showEdit === true ? <div><input className="w-32" type="text" value={editedValue}
-                 onChange={(e) => setEditedValue(e.target.value)} />
-                  <button>Save</button></div> :
-                   <p className={`min-w-64 md:min-w-80 pl-3 ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}</p>}
-                <img onClick={() => setShowEdit(true)} className="ml-5 cursor-pointer bg-indigo-400 rounded-full p-1" src="Frame 6.png" />
-                <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png" className="ml-2 bg-indigo-400 rounded-full p-1 cursor-pointer" />
+                {showEdit === true && i === updateTodo ?  <div>
+        <input className="w-32 min-w-52 md:min-w-56 pl-3 ml-2" type="text" value={editedValue} placeholder={todo.note}
+          onChange={(e) => handleEdit(e)} />
+       <button className="bg-indigo-600 text-white p-1 rounded-md ml-2" onClick={()=>endOfRename(i)}>Update</button>
+       </div>:
+                   <p className={`min-w-52 md:min-w-80 pl-3 ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}</p>}
+                <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1" src="Frame 6.png" />
+                <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png" className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
               </li>
             ) : <p className="translate-y-16"> <img src="detective.png" />No todos</p>}
-          </ul>
+          </ul>}
         </div>
         <img className="absolute block w-10 bottom-10 right-11" src="button.png" alt="add-button" onClick={addButton} />
         {showOption && (
