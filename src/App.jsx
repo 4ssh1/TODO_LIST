@@ -46,6 +46,7 @@ function App() {
     const newValue = e.target.value;
     setInputValue(newValue)
     setErrorMessage("")
+    setSelectedMode("all")
   }
 
   function checkTodo(done, index) {
