@@ -139,16 +139,16 @@ function App() {
 
   return (
     <>
-      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100% relative pt-5
+      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100%  pt-5
       ${showOption && "opacity-70"}`} >
         <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1>
-        <div className="ml-2 mr-4 md:px-10">
+        <div className="ml-2 mr-4 relative md:px-10 ">
           <div className="flex pb-8"><input className="rounded-md mr-4 pl-5 pr-9 w-44 md:w-64" type="text" name="search"
             placeholder={SearchPlaceHolder} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-            <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top left-36 md:left-64 hover:opacity-50 bg-indigo-100 " />
-{ searchValue !== ""  &&  <button className="absolute top2 left-28  md:left-56 border-none pt-1" onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
+            <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top-3 left-36 md:left-64 hover:opacity-50 bg-indigo-100 " />
+{ searchValue !== ""  &&  <button className="absolute top-3 left-28  md:left-56 border-none pt-1" onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
 }            <SelectOpt selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
-            <button className="border-none "><img onClick={() => setDarkMode(!darkmode)}
+            <button className="border-none w-12"><img onClick={() => setDarkMode(!darkmode)}
              src={darkmode ? "lightMode.png" : "darkMode.png"} /></button>
           </div>
          {search ? (

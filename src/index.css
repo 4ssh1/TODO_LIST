@@ -20,7 +20,7 @@ button:hover{
     @apply w-1/2  h-1/4 border-white 
 }
 
-.top{
+/* .top{
     top: 85px;
 }
 
@@ -35,4 +35,4 @@ button:hover{
     .top2{
         top:75px;
     }
-}
+} */
