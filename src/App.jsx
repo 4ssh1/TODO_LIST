@@ -17,9 +17,7 @@ function App() {
   const [selectedMode, setSelectedMode] = useState("all")
   const [updateTodo, setUpdateTodo] = useState(-1)
   const [SearchPlaceHolder, setSearchPlaceHolder]= useState("Search note...")
-  const searched = Todos.filter(elements => {
-    return elements.note.toLowerCase().includes(searchValue.toLowerCase())
-  })
+ 
 
   useEffect(() => {
     const storedTodo = JSON.parse(localStorage.getItem("Todo"))
@@ -31,6 +29,10 @@ function App() {
   useEffect(() => {
     return localStorage.setItem("Todo", JSON.stringify(Todos))
   }, [Todos])
+
+  useEffect(()=>{
+    show()
+  },[searchValue])
 
    function addButton() {
     setShowOption(true)
@@ -53,7 +55,7 @@ function App() {
     const updatedTodos = Todos.map((todo, i) =>
       i === index ? { ...todo, done } : todo
     );
-    setTodos(updatedTodos);
+    setTodos(updatedTodos)
   }
 
   function pushtoTodo() {
@@ -92,15 +94,20 @@ function App() {
       return true
     }
   })
-
+  
   function show(){
-    if(searchValue.length ==0){
+    if(searchValue.length=== 0){
       setSearchPlaceHolder("No input")
+      setSearch(false)
     }else{
+      const searched = Todos.filter(elements => {
+        return elements.note.toLowerCase().includes(searchValue.toLowerCase())
+      })
       setSearch(true)
       setSearchArray(searched)
       setSearchPlaceHolder("Search note ...")
     }
+   
   }
 
   function cancelSearch(){
@@ -146,9 +153,11 @@ function App() {
             <button className="border-none"><img onClick={() => setDarkMode(!darkmode)}
              src={darkmode ? "lightMode.png" : "darkMode.png"} /></button>
           </div>
-         {search ? (searchArray.map((todoSearched, i)=>{
-              <li key = {i}>{todoSearched.note}</li>
-              }))
+         {search ? (
+    searchArray.length > 0 ? searchArray.map((todoSearched, i) => (
+        <li key={i}>{todoSearched.note}</li>
+    )) : <p>No matching results found.</p>
+) 
            :
           <ul>
             {(Todos?.length > 0) ? newTodo.map((todo, i) =>
