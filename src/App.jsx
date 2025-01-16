@@ -97,7 +97,6 @@ function App() {
   
   function show(){
     if(searchValue.length=== 0){
-      setSearchPlaceHolder("No input")
       setSearch(false)
     }else{
       const searched = Todos.filter(elements => {
@@ -105,7 +104,6 @@ function App() {
       })
       setSearch(true)
       setSearchArray(searched)
-      setSearchPlaceHolder("Search note ...")
     }
    
   }
