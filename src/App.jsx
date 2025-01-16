@@ -162,11 +162,11 @@ function App() {
               <li className="flex mb-4 " key={i}>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
                 {showEdit === true && i === updateTodo ?  <div>
-        <input className="w-32 min-w-36 md:min-w-56 pl-3 ml-2" type="text" value={editedValue} placeholder={todo.note}
+        <input className="w-32 max-w-44 whitespace-nowrap overflow-x-auto md:min-w-56 pl-3 ml-2" type="text" value={editedValue} placeholder={todo.note}
           onChange={(e) => handleEdit(e)} />
        <button className="bg-indigo-600 text-white  rounded-md px-2 md:px-4 ml-2 text-center" onClick={()=>endOfRename(i)}>update</button>
        </div>:
-                   <p className={`min-w-52 md:min-w-80 pl-3 ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}</p>}
+                   <p className={`whitespace-nowrap overflow-x-auto max-w-44 md:min-w-80 pl-3 ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}</p>}
                 <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1" src="Frame 6.png" />
                 <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png" className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
               </li>
