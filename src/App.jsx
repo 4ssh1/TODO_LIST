@@ -139,7 +139,7 @@ function App() {
 
   return (
     <>
-      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100%  pt-5
+      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} h-screen w-100% relative pt-5
       ${showOption && "opacity-70"}`} >
         <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1>
         <div className="ml-2 mr-4 relative md:px-10 ">
@@ -173,7 +173,6 @@ function App() {
             ) : <p className="translate-y-16"> <img src="detective.png" />No todos</p>}
           </ul>}
         </div>
-        <img className="absolute block w-10 bottom-10 right-11" src="button.png" alt="add-button" onClick={addButton} />
         {showOption && (
           <div className="bg-transparent w-full h-full absolute top-0">
             <div id="popUp" className={`absolute z-50 card top-1/4  
@@ -189,6 +188,7 @@ function App() {
             </div>
           </div>
         )}
+                <img className="absolute block w-10 bottom-14 right-16" src="button.png" alt="add-button" onClick={addButton} />
       </div>
     </>
   )
