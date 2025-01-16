@@ -20,19 +20,3 @@ button:hover{
     @apply w-1/2  h-1/4 border-white 
 }
 
-/* .top{
-    top: 85px;
-}
-
-.top2{
-    top: 84px;
-}
-
-@media (max-width: 500px) {
-    .top{
-        top: 77px;
-    }
-    .top2{
-        top:75px;
-    }
-} */
