@@ -5,15 +5,7 @@ export default {
     "./index.html"
   ],
   theme: {
-    extend: {
-      fontSize:{
-        sm: "1px"
-      },
-      // spacing:{
-
-      // }
-      
-    },
+    extend: {},
   },
   plugins: [],
 }
