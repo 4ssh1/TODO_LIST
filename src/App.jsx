@@ -157,7 +157,7 @@ function App() {
     )) : <p>No matching results found.</p>
 ) 
            :
-          <ul>
+          <ul className="max-w-90">
             {(Todos?.length > 0) ? newTodo.map((todo, i) =>
               <li className="flex mb-4 " key={i}>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
