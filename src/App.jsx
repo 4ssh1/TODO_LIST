@@ -164,7 +164,7 @@ function App() {
                 {showEdit === true && i === updateTodo ?  <div>
         <input className="w-32 min-w-52 md:min-w-56 pl-3 ml-2" type="text" value={editedValue} placeholder={todo.note}
           onChange={(e) => handleEdit(e)} />
-       <button className="bg-indigo-600 text-white p-1 rounded-md ml-2" onClick={()=>endOfRename(i)}>Update</button>
+       <button className="bg-indigo-600 text-white  rounded-md px-4 ml-2 text-center" onClick={()=>endOfRename(i)}>update</button>
        </div>:
                    <p className={`min-w-52 md:min-w-80 pl-3 ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}</p>}
                 <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1" src="Frame 6.png" />
