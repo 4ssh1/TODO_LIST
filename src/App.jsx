@@ -188,7 +188,7 @@ function App() {
             </div>
           </div>
         )}
-                <img className="absolute block w-10 bottom-14 right-16" src="button.png" alt="add-button" onClick={addButton} />
+                <img className="absolute block w-10 bottom-20 md:bottom-14 right-16" src="button.png" alt="add-button" onClick={addButton} />
       </div>
     </>
   )
