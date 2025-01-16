@@ -129,8 +129,8 @@ function App() {
   }
 
   function endOfRename(index){
-      const updatedTodos = Todos.map((todo, i) =>
-        i === index ? { ...todo, note:editedValue } : todo
+    const updatedTodos = Todos.map((todo, i) =>
+        i === index && editedValue !== ""? { ...todo, note:editedValue } : todo
       );
       setTodos(updatedTodos)
       setShowEdit(false)
