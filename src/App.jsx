@@ -196,7 +196,7 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
               </li>
             ) 
             : 
-            <p className="translate-y-16"> <img src="detective.png" />No todos</p>}
+            <p className="translate-y-16"> <img src="detective.png" />No todos</p> }<br/><br/>
           </ul>}
         </div>
         {showOption && (
