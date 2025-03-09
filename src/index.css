@@ -20,3 +20,8 @@ button:hover{
     @apply w-1/2  h-1/4 border-white 
 }
 
+.black{
+    color: black;
+}
+
+
