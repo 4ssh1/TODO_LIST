@@ -6,7 +6,7 @@ function getRandomQuotes(){
         "🌷Success is not final, failure is not fatal: it is the courage🌷",
         "🥀The only way to do great work is to love what you do.🥀" ,
         "💮Be the change that you wish to see in the world.💮",
-        "💐Spread love everywhere you go..💐" ,
+        "💐Spread love everywhere you go..💐",
         "🌻You are braver than you believe, stronger than you seem.🌻", 
         "🪷The future belongs to those who believe in the beauty of their dreams.🪷" ,
         "🌺It is never too late to be what you might have been.🌺" ,
