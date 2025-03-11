@@ -8,9 +8,9 @@ const quoteFunc = quoteslib.getRandomQuotes
 const app = express();
 const PORT = process.env.PORT;
 
-mongoose.connect(process.env.DATABASE)
-        .then(()=>console.log("DB connection is successful"))
-        .catch((err)=>console.log("DB error: ", err))
+// mongoose.connect(process.env.DATABASE)
+//         .then(()=>console.log("DB connection is successful"))
+//         .catch((err)=>console.log("DB error: ", err))
 
 app.use(cors());
 app.use(express.json())
