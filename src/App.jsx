@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 // import "./index.css"
 import SelectOpt from "./selectOpt"
+import js from "@eslint/js"
 
 
 function App() {
-  const [darkmode, setDarkMode] = useState(false)
+  const [darkmode, setDarkMode] = useState(()=>{
+    return JSON.parse(localStorage.getItem("Theme")) || false
+  })
   const [quote, setQuote] = useState("")
   const [Todos, setTodos] = useState([])
   const [searchArray, setSearchArray] = useState([])
@@ -21,7 +24,7 @@ function App() {
  
 
   useEffect(() => {
-    const storedTodo = JSON.parse(localStorage.getItem("Todo"))
+    const storedTodo = JSON.parse(localStorage.getItem("Todo"));
     if (storedTodo && storedTodo.length > 0) {
       setTodos(storedTodo)
     }
@@ -44,6 +47,10 @@ function App() {
   useEffect(() => {
     return localStorage.setItem("Todo", JSON.stringify(Todos))
   }, [Todos])
+
+  useEffect(()=>{
+    localStorage.setItem("Theme", JSON.stringify(darkmode))
+  }, [darkmode])
 
   useEffect(()=>{
     show()
