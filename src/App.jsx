@@ -206,11 +206,11 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
               <li className="flex mb-4 " key={i}>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
                 {showEdit === true && i === updateTodo ?  
-                <div>
-                  <input className="w-32 max-w-44 whitespace-nowrap overflow-x-auto md:min-w-56 pl-3 ml-2" type="text"
+                <div className="flex justify-between">
+                  <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2" type="text"
                   value={editedValue} placeholder={todo.note} onChange={(e) => handleEdit(e)} />
-                  <button className="bg-indigo-600 text-white  rounded-md px-2 md:px-4 ml-2 text-center" 
-                  onClick={()=>endOfRename(i)}>update</button>
+                  <button className="bg-indigo-600 text-white w-10 block rounded-md px-1 md:px-4 ml-2 text-center" 
+                  onClick={()=>endOfRename(i)}>save</button>
                 </div>
                 :
                    <span className={`whitespace-nowrap overflow-x-auto inline-block pl-3 w-full 
