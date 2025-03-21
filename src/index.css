@@ -24,4 +24,12 @@ button:hover{
     color: black;
 }
 
+.width{
+    width: 10.5rem;
+}
 
+@media (max-width:329px) {
+    input{
+        padding: 3px 0;
+    }
+}

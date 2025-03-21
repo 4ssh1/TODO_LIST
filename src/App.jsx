@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 // import "./index.css"
 import SelectOpt from "./selectOpt"
-import js from "@eslint/js"
+import { meta } from "@eslint/js"
 
 
 function App() {
@@ -30,19 +30,19 @@ function App() {
     }
   }, [])
 
- useEffect(()=>{
-  function fetchQuote() {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/quote`)
-          .then(response=>response.json())
-          .then(data=> setQuote(data.quote))
-          .catch(error=> console.log("Error fetching data: ", error))
-  }
+//  useEffect(()=>{
+//   function fetchQuote() {
+//     fetch(`${import.meta.env.VITE_BACKEND_URL}/quote`)
+//           .then(response=>response.json())
+//           .then(data=> setQuote(data.quote))
+//           .catch(error=> console.log("Error fetching data: ", error))
+//   }
 
-  fetchQuote()
-  const interval = setInterval(fetchQuote, 10 * 1000);
+//   fetchQuote()
+//   const interval = setInterval(fetchQuote, 10 * 1000);
 
-  return ()=> clearInterval(interval)
- }, [])
+//   return ()=> clearInterval(interval)
+//  }, [])
 
   useEffect(() => {
     return localStorage.setItem("Todo", JSON.stringify(Todos))
@@ -86,6 +86,25 @@ function App() {
       setInputValue("")
     } else {
       const newTodo = { note: inputValue, done: false };
+
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/add`,{
+         method: "POST",
+         body: JSON.stringify({
+            task: newTodo
+         }),
+         headers:{
+          "Content-type": "application/json; charset= UTF-8"
+         }
+        })
+        .then(response=> {
+          if(!response.ok){
+            throw new Error('HTTP error!, status:' + response.status)
+          }
+          return response.json()
+        })
+        .then(finalRes=> console.log(finalRes))
+        .catch(err=>console.log("Fetch error:", err))
+
       const updatedTodos = [...Todos, newTodo];
       if(selectedMode === "all"){
         console.log(updatedTodos)
@@ -165,11 +184,11 @@ function App() {
       ${showOption && "opacity-70"}`} >
         <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1>
         <div className="ml-2 mr-4 relative md:px-10 ">
-          <div className="flex pb-8"><input className="rounded-md md:mr-4 pl-5 pr-9 w-44 md:w-64 black" type="text" name="search"
+          <div className="flex pb-8"><input className="rounded-md mr-2 md:mr-4 pl-5 pr-16 sm:pr-9 width sm:w-64 black" type="text" name="search"
             placeholder={SearchPlaceHolder} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-            <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top-3 left-36 md:left-64 
+            <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top-2.5 sm:top-3 left-36 md:left-64 
             hover:opacity-50 bg-indigo-100 " />
-{ searchValue !== ""  &&  <button className="absolute top-3 left-28  md:left-56 border-none pt-1" 
+{ searchValue !== ""  &&  <button className="absolute top-2 sm:top-3 left-28  md:left-56 border-none pt-1" 
 onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
 }            <SelectOpt selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
             <button className="border-none w-12"><img onClick={() => setDarkMode(!darkmode)}
