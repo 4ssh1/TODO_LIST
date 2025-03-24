@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 // import "./index.css"
 import SelectOpt from "./selectOpt"
 import { meta } from "@eslint/js"
+import { useNavigate } from "react-router-dom"
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [selectedMode, setSelectedMode] = useState("all")
   const [updateTodo, setUpdateTodo] = useState(-1)
   const [SearchPlaceHolder, setSearchPlaceHolder]= useState("Search note...")
+  const navigate = useNavigate()
  
 
   useEffect(() => {
@@ -182,9 +184,16 @@ function App() {
     <>
       <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} min-h-screen w-100% relative pt-5
       ${showOption && "opacity-70"}`} >
-        <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1>
+        <div className="flex justify-around">
+          <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1> 
+          <div className="flex h-13 items-center">
+            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white ease-in-out py-1" onClick={()=>navigate('/signup')}>Sign in</button>
+            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out py-1" onClick={()=>navigate('/login')}>Log in</button>
+          </div>
+        </div>
         <div className="ml-2 mr-4 relative md:px-10 ">
-          <div className="flex pb-8"><input className="rounded-md mr-2 md:mr-4 pl-4 pr-16 sm:pr-9 width sm:w-64 black" type="text" name="search"
+          <div className="flex pb-8"><input className="rounded-md mr-2 md:mr-4 pl-4 pr-16 sm:pr-9 width sm:w-64 black" 
+          type="text" name="search"
             placeholder={SearchPlaceHolder} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
             <img src="Vector.png" onClick={()=>show()} className="w-4 h-5 block absolute top-2.5 sm:top-3 left-36 md:left-64 
             hover:opacity-50 bg-indigo-100 " />
@@ -207,7 +216,8 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
                 {showEdit === true && i === updateTodo ?  
                 <div className="flex justify-between">
-                  <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2" type="text"
+                  <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2"
+                   type="text"
                   value={editedValue} placeholder={todo.note} onChange={(e) => handleEdit(e)} />
                   <button className="bg-indigo-600 text-white w-10 block rounded-md px-1 md:px-4 ml-2 text-center" 
                   onClick={()=>endOfRename(i)}>save</button>
@@ -217,8 +227,10 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
                    ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}
                    </span>
                    }
-                  <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1" src="Frame 6.png" />
-                  <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png" className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
+                  <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1"
+                   src="Frame 6.png" />
+                  <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png"
+                   className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
               </li>
             ) 
             : 
