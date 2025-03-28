@@ -28,6 +28,11 @@ button:hover{
     width: 10.5rem;
 }
 
+.password{
+    display: inline-block;
+    width: 13rem;
+}
+
 @media (max-width:329px) {
     input{
         padding: 3px 0;

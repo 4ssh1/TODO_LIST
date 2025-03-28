@@ -2,10 +2,10 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 function Signin() {
+    const navigate = useNavigate()  
   
     const [errorMessage, setErrorMessage] = useState({})
     const [SignedMessage, setSignedMessage] = useState('')
-    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -58,30 +58,46 @@ function Signin() {
     }
    
   return (
-    <div>
-      <form action="" method="get" onSubmit={handleSubmit} className="w-1/2  mx-auto">
-        <div><label htmlFor="name">Full Name: </label><input type="text" name="name" 
-        id="name" onChange={handleChange} />
-        </div>
-        {errorMessage && <span className="text-red-700 text-xs">{errorMessage.name}</span>}
-        <div><label htmlFor="email">Email:</label><input type="email" name="email" 
-        id="email"  onChange={handleChange}/>
-        </div>
-        {errorMessage && <span className="text-red-700 text-xs">{errorMessage.email}</span>}
-        <div><label htmlFor="password">Password</label><input type="password" name="password" 
-        id="password" onChange={handleChange} />
-        </div>
-        {errorMessage && <span className="text-red-700 text-xs">{errorMessage.password}</span>}
-        <div><label htmlFor="conPass">Confirm password</label><input type="password" name="conPass" 
-        id="conPass"  onChange={handleChange}/>
-        </div>
-        {errorMessage && <span className="text-red-700 text-xs">{errorMessage.confirm}</span>}
-        <div className="flex gap-10 mt-4">
-          <button className="" type="button" onClick={handleCancel}>Cancel</button>
-          <button type="submit" onClick={handleSubmit} className="">Submit</button>
-        </div>
-        <h3 className="text-green-700 ">{SignedMessage}</h3>
-      </form>
+    <div className="flex justify-center items-center h-screen">
+      <div className="mx-auto w-1/2 shadow-lg border-2 rounded-md py-4 pr-10">
+        <form action="" method="get" onSubmit={handleSubmit} className="w-1/2  mx-auto">
+          <div className="mb-2">
+            <label htmlFor="name">Full Name: </label><input type="text" name="name"
+          id="name" onChange={handleChange}  className="rounded-md focus:bg-slate-200 px-3 py-1" />
+          </div>
+          {errorMessage && <span className="text-red-700 text-xs">{errorMessage.name}</span>}
+          <div className="mb-2">
+            <label htmlFor="email">Email:</label><input type="email" name="email"
+          id="email"  onChange={handleChange} className="rounded-md focus:bg-slate-200 px-3 py-1"/>
+          </div>
+          {errorMessage && <span className="text-red-700 text-xs">{errorMessage.email}</span>}
+          <div>
+            <label htmlFor="password">Password</label><input type="password" name="password"
+          id="password" onChange={handleChange}  className="rounded-md focus:bg-slate-200 px-3 py-1"/>
+          </div>
+          {errorMessage && <span className="text-red-700 text-xs password">{errorMessage.password}</span>}
+          <div className="mb-2">
+            <label htmlFor="conPass">Confirm password</label><input type="password" name="conPass"
+          id="conPass"  onChange={handleChange} className="rounded-md focus:bg-slate-200 px-3 py-1"/>
+          </div>
+          {errorMessage && <span className="text-red-700 text-xs">{errorMessage.confirm}</span>}
+          <div className="flex gap-10 mt-4">
+            <button className="py-1 px-2 hover:bg-red-600 hover:text-white rounded-lg" 
+            type="button" onClick={handleCancel}>Cancel</button>
+            <button type="submit" onClick={handleSubmit} 
+            className="py-1 px-2 hover:bg-green-600 hover:text-white rounded-lg">Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className="absolute top-20">
+            {SignedMessage && 
+            <h2 className={
+              `${SignedMessage === 'You are now signed in' ? "text-green-500" : "text-red-600"} text-md font-semibold`}>
+                {SignedMessage}
+            </h2>
+            }
+          </div>
     </div>
   )
 }
