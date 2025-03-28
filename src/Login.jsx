@@ -45,7 +45,7 @@ function handleSubmit(e){
 
   return (
     <div className="flex justify-center items-center h-screen relative">
-      <div className="mx-auto w-1/2 shadow-lg border-2 rounded-md py-4 pr-10">
+      <div className="mx-auto w-full sm:w-1/2 shadow-lg border-2 rounded-md py-4 pr-10">
           <form action="" method="get" onSubmit={handleSubmit} className="w-1/2  mx-auto">
           <div className="mb-2">
             <label htmlFor="email">Email:</label>
@@ -63,14 +63,14 @@ function handleSubmit(e){
           </div>
           </form>
       </div>
-          <div className="absolute top-20">
-            {SignedMessage && 
-            <h2 className={
-              `${SignedMessage === 'You are now logged in' ? "text-green-500" : "text-red-600"} text-md font-semibold`}>
-                {SignedMessage}
-            </h2>
-            }
-          </div>
+      <div className="absolute top-10 sm:top-20 px-3 ">
+        {SignedMessage && 
+          <h2 className={
+            `${SignedMessage === 'You are now logged in' ? "text-green-500" : "text-red-600"} text-md font-semibold`}>
+              {SignedMessage}
+          </h2>
+        }
+      </div>
     </div>
   )
 }

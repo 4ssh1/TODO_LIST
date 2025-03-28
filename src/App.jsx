@@ -184,11 +184,11 @@ function App() {
     <>
       <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} min-h-screen w-100% relative pt-5
       ${showOption && "opacity-70"}`} >
-        <div className="flex justify-around">
-          <h1 className="text-center pb-4 pt-1 font-bold md:text-3xl tracking-wide">TODO LIST</h1> 
+        <div className="flex justify-around mb-6 sm:mb-1 items-center ">
+          <h1 className="text-center sm:pb-4 sm:pt-1 font-bold text-2xl md:text-3xl tracking-wide">TODO LIST</h1> 
           <div className="flex h-13 items-center">
-            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white ease-in-out py-1" onClick={()=>navigate('/signup')}>Sign in</button>
-            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out py-1" onClick={()=>navigate('/login')}>Log in</button>
+            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/signup')}>Sign in</button>
+            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/login')}>Log in</button>
           </div>
         </div>
         <div className="ml-2 mr-4 relative md:px-10 ">
@@ -206,7 +206,7 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
           
          {search ? (
     searchArray.length > 0 ? searchArray.map((todoSearched, i) => (
-        <li key={i}>{todoSearched.note}</li>
+        <p key={i} className="overflow-x-scroll">{todoSearched.note} </p>
     )) : <p>No matching results found.</p>
 ) 
            :
