@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,7 @@ function Signin() {
         password: "",
         conPass: ""
     })
+
 
 
 
@@ -30,7 +32,7 @@ function Signin() {
       setTimeout(()=>(navigate('/')), 3000)
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
        const  error = {}
         e.preventDefault();
         if(!formData?.name.trim()){
@@ -53,6 +55,9 @@ function Signin() {
     
         if (Object.keys(error).length === 0) {
           setSignedMessage("You are now signed in")
+          const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/quote`)
+          if(!data) return 
+          console.log(data)
           setTimeout(()=>(navigate("/")), 3000)
         }
     }

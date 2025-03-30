@@ -39,6 +39,11 @@ function handleSubmit(e){
     if (Object.keys(error).length === 0) {
       setSignedMessage("You are now logged in")
       setTimeout(()=>(navigate("/")), 3000)
+      // try {
+      //   const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/signin`, {...loginData})
+      // } catch (error) {
+      //   console.log(error)
+      // }
     }
 }
 

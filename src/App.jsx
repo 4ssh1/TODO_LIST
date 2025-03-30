@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 // import "./index.css"
 import SelectOpt from "./selectOpt"
-import { meta } from "@eslint/js"
 import { useNavigate } from "react-router-dom"
 
 
