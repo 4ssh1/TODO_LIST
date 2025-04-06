@@ -11,11 +11,6 @@ function Login() {
     password:""
   })
   
-function handleCancel(){
-  setErrorMessage({})
-  setSignedMessage("You are not logged in, redirecting to home page")
-  setTimeout(()=>(navigate('/')), 3000)
-}
   
 function handleChange(e) {
   e.preventDefault()
@@ -49,33 +44,42 @@ function handleSubmit(e){
 
 
   return (
-    <div className="flex justify-center items-center h-screen relative">
-      <div className="mx-auto w-full sm:w-1/2 shadow-lg border-2 rounded-md py-4 pr-10">
-          <form action="" method="get" onSubmit={handleSubmit} className="w-1/2  mx-auto">
-          <div className="mb-2">
-            <label htmlFor="email">Email:</label>
-            <input type="email" name="email" id="email" onChange={handleChange} className="rounded-md focus:bg-slate-200 px-3 py-1"/>
-            </div>
-            {errorMessage && <span className="text-red-700 text-xs">{errorMessage.email}</span>}
-          <div className="mb-2">
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" onChange={handleChange} className="rounded-md focus:bg-slate-200 px-3 py-1"/>
-          </div>
-            {errorMessage && <span className="text-red-700 text-xs password">{errorMessage.password}</span>}
-          <div className="flex gap-10 mt-4">
-            <button className="py-1 px-2 hover:bg-red-600 hover:text-white rounded-lg" type="button" onClick={handleCancel}>Cancel</button>
-            <button type="submit" onClick={handleSubmit} className="py-1 px-2 hover:bg-green-600 hover:text-white rounded-lg">Login</button>
-          </div>
-          </form>
-      </div>
-      <div className="absolute top-10 sm:top-20 px-3 ">
-        {SignedMessage && 
-          <h2 className={
-            `${SignedMessage === 'You are now logged in' ? "text-green-500" : "text-red-600"} text-md font-semibold`}>
-              {SignedMessage}
-          </h2>
-        }
-      </div>
+    <div className="mx-auto sm:w-1/2 sm:translate-x-20">
+      <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
+      <form action="" method="get" className="space-y-5" onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input type="email" id="email" name="email" 
+                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                  {errorMessage && <span className="text-red-700 text-xs">{errorMessage?.email}</span>}
+
+        </div>
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <input type="password" id="password" name="password" 
+                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+               {errorMessage && <span className="text-red-700 text-xs">{errorMessage?.password}</span>}
+
+        </div>
+        <div className="flex items-center justify-between text-sm">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" className="rounded border-gray-300 focus:ring-blue-500"/>
+            <span className="text-gray-700">Remember me</span>
+          </label>
+          <a href="#" className="text-blue-600 hover:underline">Forgot password?</a>
+        </div>
+        <div>
+          <button type="submit" onClick={handleSubmit}
+                  className="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+            Login
+          </button>
+        </div>
+        <p className="text-center text-sm text-gray-600">Don't have an account?
+          <button className="text-blue-600 hover:underline border-0 pl-1" onClick={()=>navigate('/signup')}>Sign up</button>
+        </p>
+      </form>
+        </div>
     </div>
   )
 }

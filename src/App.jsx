@@ -181,13 +181,13 @@ function App() {
 
   return (
     <>
-      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} min-h-screen w-100% relative pt-5
+      <div className={`${darkmode ? "bg-slate-900 text-white" : "bg-white"} min-h-screen w-100% relative pt-5 
       ${showOption && "opacity-70"}`} >
         <div className="flex justify-around mb-6 sm:mb-1 items-center ">
           <h1 className="text-center sm:pb-4 sm:pt-1 font-bold text-2xl md:text-3xl tracking-wide">TODO LIST</h1> 
           <div className="flex h-13 items-center">
-            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/signup')}>Sign in</button>
-            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/login')}>Log in</button>
+            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white font-serif ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/signup')}>Sign in</button>
+            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out font-serif pb-1 sm:py-1" onClick={()=>navigate('/login')}>Log in</button>
           </div>
         </div>
         <div className="ml-2 mr-4 relative md:px-10 ">
@@ -209,27 +209,35 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
     )) : <p>No matching results found.</p>
 ) 
            :
-          <ul className="max-w-90">
+          <ul>
             {(Todos?.length > 0) ? newTodo.map((todo, i) =>
               <li className="flex mb-4 " key={i}>
                 <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
                 {showEdit === true && i === updateTodo ?  
                 <div className="flex justify-between">
-                  <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2"
-                   type="text"
-                  value={editedValue} placeholder={todo.note} onChange={(e) => handleEdit(e)} />
-                  <button className="bg-indigo-600 text-white w-10 block rounded-md px-1 md:px-4 ml-2 text-center" 
+                  <div>
+                    <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2"
+                     type="text"
+                    value={editedValue} placeholder={todo.note} onChange={(e) => handleEdit(e)} />
+                  </div>
+                  <button className="bg-indigo-600 text-white  font-semibold block rounded-md px-2 py-[0.2]  ml-2 text-center" 
                   onClick={()=>endOfRename(i)}>save</button>
                 </div>
                 :
-                   <span className={`whitespace-nowrap overflow-x-auto inline-block pl-3 w-full 
-                   ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}
-                   </span>
+                <div className="flex justify-between w-full items-center">
+                    <div>
+                      <span className={`whitespace-nowrap overflow-x-auto inline-block pl-3 w-full
+                       ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}
+                      </span>
+                    </div>
+                    <div className="flex">
+                      <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1"
+                       src="Frame 6.png" />
+                      <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png"
+                       className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
+                    </div>
+                </div>
                    }
-                  <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1"
-                   src="Frame 6.png" />
-                  <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png"
-                   className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
               </li>
             ) 
             : 
@@ -240,7 +248,7 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
           <div className="bg-transparent w-full h-full absolute top-0">
             <div id="popUp" className={`absolute z-50 card top-1/4  
               ${darkmode ? "bg-slate-700 text-black" : "bg-gray-300 text-black"} 
-              drop-shadow-2xl rounded-xl inset-0 left-1/4 flex flex-col px-2`}>
+              drop-shadow-2xl rounded-xl inset-0 left-1/4 flex flex-col px-2 `}>
               <h2 className={`text-center ${darkmode && "text-white"} pb-1`}>NEW NOTE</h2>
               <input className="block px-3" type="text" name="" id="" placeholder="Input your note..."
                 value={inputValue} onChange={addtoTodo} />
