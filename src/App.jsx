@@ -240,7 +240,7 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
               </div>
             ) : (
               <div className="flex w-full max-w-full items-center justify-between gap-1">
-                <div className="  max-w-[70%] w-[70%] pl-3 overflow-x-scroll sm:overflow-hidden">
+                <div className="  max-w-[70%] w-[70%] pl-3 overflow-x-scroll sm:overflow-x-hidden">
                   <p className={`${todo.done === true ? "line-through text-slate-500" : ""} `}>
                     {todo.note}
                   </p>
