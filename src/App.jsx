@@ -31,19 +31,22 @@ function App() {
     }
   }, [])
 
-//  useEffect(()=>{
-//   function fetchQuote() {
-//     fetch(`${import.meta.env.VITE_BACKEND_URL}/quote`)
-//           .then(response=>response.json())
-//           .then(data=> setQuote(data.quote))
-//           .catch(error=> console.log("Error fetching data: ", error))
-//   }
+  useEffect(()=>{
+    function fetchQuote() {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/quotes`,{
+        method: "GET",
+        credentials: "include"
+      })
+            .then(response=>response.json())
+            .then(data=> setQuote(data.quote))
+            .catch(error=> console.log("Error fetching data: ", error))
+    }
 
-//   fetchQuote()
-//   const interval = setInterval(fetchQuote, 10 * 1000);
+    fetchQuote()
+    const interval = setInterval(fetchQuote, 10 * 1000);
 
-//   return ()=> clearInterval(interval)
-//  }, [])
+    return ()=> clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     return localStorage.setItem("Todo", JSON.stringify(Todos))
@@ -186,8 +189,8 @@ function App() {
         <div className="flex justify-around mb-6 sm:mb-1 items-center ">
           <h1 className="text-center sm:pb-4 sm:pt-1 font-bold text-2xl md:text-3xl tracking-wide">TODO LIST</h1> 
           <div className="flex h-13 items-center">
-            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white font-serif ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/signup')}>Sign in</button>
-            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out font-serif pb-1 sm:py-1" onClick={()=>navigate('/login')}>Log in</button>
+            <button className="mr-3 rounded-md w-16 bg-blue-800 text-white font-serif text-sm ease-in-out pb-1 sm:py-1" onClick={()=>navigate('/signup')}>Sign in</button>
+            <button className="rounded-md w-16 bg-blue-800 text-white ease-in-out font-serif text-sm pb-1 sm:py-1" onClick={()=>navigate('/login')}>Log in</button>
           </div>
         </div>
         <div className="ml-2 mr-4 relative md:px-10 ">
