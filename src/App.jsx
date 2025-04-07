@@ -41,7 +41,7 @@ function App() {
             .then(data=> setQuote(data.quote))
             .catch(error=> console.log("Error fetching data: ", error))
     }
-
+    console.log(`${import.meta.env.VITE_BACKEND_URL}`)
     fetchQuote()
     const interval = setInterval(fetchQuote, 10 * 1000);
 
