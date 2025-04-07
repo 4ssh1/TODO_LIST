@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-// import "./index.css"
 import SelectOpt from "./selectOpt"
 import { useNavigate } from "react-router-dom"
 
@@ -94,7 +93,8 @@ function App() {
       fetch(`${import.meta.env.VITE_BACKEND_URL}/add`,{
          method: "POST",
          body: JSON.stringify({
-            task: newTodo
+            todo: newTodo.note,
+            completed: newTodo.done
          }),
          headers:{
           "Content-type": "application/json; charset= UTF-8"
