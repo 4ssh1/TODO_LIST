@@ -292,7 +292,7 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
           </div>
         )}
 
-                  <div className="absolute bottom-30 flex flex-wrap w-full p-5">
+                  <div className="absolute bottom-30 flex justify-around flex-wrap w-full pt-5 gap-10 px-10">
                     <p className="text-purple-700 text-center py-5">{quote}</p>
                     <div><img src="button.png" alt="add-button" onClick={addButton} className="block w-10"/></div>
                   </div>
