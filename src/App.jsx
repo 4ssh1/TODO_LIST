@@ -205,47 +205,72 @@ onClick={()=> cancelSearch()}><img src="cancel.png"/></button>
             <button className="border-none w-12"><img onClick={() => setDarkMode(!darkmode)}
              src={darkmode ? "lightMode.png" : "darkMode.png"} /></button>
           </div>
-          
-         {search ? (
-    searchArray.length > 0 ? searchArray.map((todoSearched, i) => (
-        <p key={i} className="overflow-x-scroll">{todoSearched.note} </p>
-    )) : <p>No matching results found.</p>
-) 
-           :
-          <ul>
-            {(Todos?.length > 0) ? newTodo.map((todo, i) =>
-              <li className="flex mb-4 " key={i}>
-                <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
-                {showEdit === true && i === updateTodo ?  
-                <div className="flex justify-between">
-                  <div>
-                    <input className="w-44 max-w-44 whitespace-nowrap block rounded-md black overflow-x-auto md:min-w-56 pl-3 ml-2"
-                     type="text"
-                    value={editedValue} placeholder={todo.note} onChange={(e) => handleEdit(e)} />
-                  </div>
-                  <button className="bg-indigo-600 text-white  font-semibold block rounded-md px-2 py-[0.2]  ml-2 text-center" 
-                  onClick={()=>endOfRename(i)}>save</button>
+          <div className="">
+  {search ? (
+    searchArray.length > 0 ? (
+      searchArray.map((todoSearched, i) => (
+        <p key={i} className="overflow-x-auto truncate">{todoSearched.note}</p>
+      ))
+    ) : (
+      <p>No matching results found.</p>
+    )
+  ) : (
+    <ul>
+      {Todos?.length > 0 ? (
+        newTodo.map((todo, i) => (
+          <li className="flex mb-4" key={i}>
+            <input type="checkbox" name="Todo-List" checked={todo.done} onChange={(e) => checkTodo(e.target.checked, i)} />
+            {showEdit === true && i === updateTodo ? (
+              <div className="flex justify-between gap-2">
+                <div>
+                  <input
+                    className="w-full max-w-full whitespace-nowrap block rounded-md black overflow-x-auto pl-3 ml-2"
+                    type="text"
+                    value={editedValue}
+                    placeholder={todo.note}
+                    onChange={(e) => handleEdit(e)}
+                  />
                 </div>
-                :
-                <div className="flex justify-between w-full items-center">
-                    <div>
-                      <span className={`whitespace-nowrap overflow-x-auto inline-block pl-3 w-full
-                       ${todo.done === true ? "line-through text-slate-500" : ""}`}> {todo.note}
-                      </span>
-                    </div>
-                    <div className="flex">
-                      <img onClick={()=>renameTodo(i)} className="ml-7 cursor-pointer bg-indigo-400 rounded-full p-1"
-                       src="Frame 6.png" />
-                      <img onClick={() => deleteTodo(i)} src="trash-svgrepo-com 1.png"
-                       className="ml-4 bg-indigo-400 rounded-full p-1 cursor-pointer" />
-                    </div>
+                <button
+                  className="bg-indigo-600 text-white font-semibold block rounded-md px-2 py-[0.2] ml-2 text-center"
+                  onClick={() => endOfRename(i)}
+                >
+                  save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full max-w-full items-center justify-between gap-1">
+                <div className="  max-w-[70%] w-[70%] pl-3 overflow-x-scroll sm:overflow-hidden">
+                  <p className={`${todo.done === true ? "line-through text-slate-500" : ""} `}>
+                    {todo.note}
+                  </p>
                 </div>
-                   }
-              </li>
-            ) 
-            : 
-            <p className="translate-y-16"> <img src="detective.png" />No todos</p> }<br/><br/>
-          </ul>}
+                <div className="flex gap-2">
+                  <img
+                    onClick={() => renameTodo(i)}
+                    className="cursor-pointer bg-indigo-400 rounded-full p-1 max-w-full object-contain"
+                    src="Frame 6.png"
+                  />
+                  <img
+                    onClick={() => deleteTodo(i)}
+                    src="trash-svgrepo-com 1.png"
+                    className=" bg-indigo-400 rounded-full p-1 cursor-pointer"
+                  />
+                </div>
+              </div>
+            )}
+          </li>
+        ))
+      ) : (
+        <p className="translate-y-16">
+          <img src="detective.png" /> No todos
+        </p>
+      )}
+      <br /><br />
+    </ul>
+  )}
+</div>
+
         </div>
         {showOption && (
           <div className="bg-transparent w-full h-full absolute top-0">
