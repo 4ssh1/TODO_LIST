@@ -90,7 +90,7 @@ function App() {
     } else {
       const newTodo = { note: inputValue, done: false };
 
-      fetch(`${import.meta.env.VITE_BACKEND_URL}/add`,{
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/todo/add`,{
          method: "POST",
          body: JSON.stringify({
             todo: newTodo.note,
